@@ -11,7 +11,7 @@ export const ForgotPassword = () => {
 
   return (
     <section>
-      <h1 className='text-3xl text-center mt-6 font-bold uppercase'>Forgot Password</h1>
+      <h1 className='text-3xl text-center mt-6 font-semibold uppercase'>Reset Password</h1>
       <div>
         <div className='lg:w-1/3 md:w-2/4 w-3/4 mx-auto py-12'>
           <form>
@@ -21,7 +21,7 @@ export const ForgotPassword = () => {
               value={email}
               onChange={onChange}
               placeholder='Email address'
-              className='w-full block bg-gray-50 border mb-4  rounded-md shadow-lg'
+              className='w-full block bg-gray-50 border-gray-200 mb-4  rounded-md shadow-lg'
             />
             <div className='flex flex-col text-center pt-4 text-sm sm:text-base'>
               <p>

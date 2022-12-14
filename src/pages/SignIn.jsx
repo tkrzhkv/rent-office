@@ -22,7 +22,7 @@ export const SignIn = () => {
 
   return (
     <section>
-      <h1 className='text-3xl text-center mt-6 font-bold uppercase'>Sign In</h1>
+      <h1 className='text-3xl text-center mt-6 font-semibold uppercase'>Sign In</h1>
       <div>
         <div className='lg:w-1/3 md:w-2/4 w-3/4 mx-auto py-12'>
           <form className='selection:bg-transparent'>
@@ -32,7 +32,7 @@ export const SignIn = () => {
               value={email}
               onChange={onChange}
               placeholder='Email address'
-              className='w-full block bg-gray-50 border mb-4  rounded-md shadow-lg'
+              className='w-full block bg-gray-50 border-gray-200 mb-4  rounded-md shadow-lg'
             />
             <div className='relative'>
               <input
@@ -41,7 +41,7 @@ export const SignIn = () => {
                 value={password}
                 onChange={onChange}
                 placeholder='Password'
-                className='w-full block bg-gray-50 border  rounded-md shadow-lg'
+                className='w-full block bg-gray-50 border-gray-200  rounded-md shadow-lg'
               />
               <div
                 className='absolute right-3 top-3 text-xl cursor-pointer text-gray-600 selection:bg-transparent'
