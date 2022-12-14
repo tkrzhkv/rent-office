@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { OAuth } from "../components/OAuth";
+import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
+import { toast } from "react-toastify";
 
 export const SignIn = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -20,12 +23,26 @@ export const SignIn = () => {
     }));
   };
 
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const auth = getAuth();
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      if (userCredential.user) {
+        navigate("/");
+      }
+    } catch (error) {
+      toast.error("Bad user credentials");
+    }
+  };
+
   return (
     <section>
       <h1 className='text-3xl text-center mt-6 font-semibold uppercase'>Sign In</h1>
       <div>
         <div className='lg:w-1/3 md:w-2/4 w-3/4 mx-auto py-12'>
-          <form className='selection:bg-transparent'>
+          <form onSubmit={onSubmit}>
             <input
               type='email'
               id='email'
