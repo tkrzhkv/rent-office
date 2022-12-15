@@ -49,7 +49,7 @@ export const Profile = () => {
     <>
       <section className=' flex justify-center items-center flex-col'>
         <h1 className='text-3xl font-semibold text-center pt-8'>My Profile</h1>
-        <div className='w-full md:w-[50%] mt-6 px-3'>
+        <div className='lg:w-1/3 md:w-2/4 w-3/4 mx-auto py-12'>
           <form>
             <input
               type='text'
@@ -67,9 +67,7 @@ export const Profile = () => {
               value={email}
               disabled={!changeDetail}
               onChange={onChange}
-              className={`w-full px-4 py-2 text-xl text-gray-700 bg-gray-50 border border-gray-300 rounded transition ease-in-out ${
-                changeDetail && "bg-green-100 focus:bg-green-100"
-              }`}
+              className='w-full px-4 py-2 text-xl text-gray-700 bg-gray-50 border border-gray-300 rounded transition ease-in-out'
             />
             <div className='flex justify-between pt-6'>
               <button
