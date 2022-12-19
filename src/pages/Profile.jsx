@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { getAuth, updateProfile } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { updateDoc, doc } from "firebase/firestore";
 import { db } from "../firebase";
@@ -57,7 +57,7 @@ export const Profile = () => {
               value={name}
               disabled={!changeDetail}
               onChange={onChange}
-              className={`w-full px-4 py-2 text-xl text-gray-700 bg-gray-50 border border-gray-300 rounded transition ease-in-out mb-4 ${
+              className={`w-full px-4 py-2 text-lg text-gray-700 bg-gray-50 border border-gray-300 rounded transition ease-in-out mb-4 shadow-lg ${
                 changeDetail && "bg-green-100 focus:bg-green-100"
               }`}
             />
@@ -65,9 +65,9 @@ export const Profile = () => {
               type='email'
               id='email'
               value={email}
-              disabled={!changeDetail}
+              disabled
               onChange={onChange}
-              className='w-full px-4 py-2 text-xl text-gray-700 bg-gray-50 border border-gray-300 rounded transition ease-in-out'
+              className='w-full px-4 py-2 text-lg text-gray-700 bg-gray-50 border border-gray-300 rounded transition ease-in-out shadow-lg'
             />
             <div className='flex justify-between pt-6'>
               <button
@@ -76,19 +76,25 @@ export const Profile = () => {
                   setChangeDetail((prevState) => !prevState);
                 }}
                 type='button'
-                className='bg-blue-500 rounded-md p-3 text-white'
+                className='md:text-base text-sm bg-gray-100 border-blue-600 border-2 rounded-2xl p-3 text-black font-semibold py-3 px-7 hover:bg-blue-500 shadow-lg uppercase hover:text-white'
               >
                 {changeDetail ? "Apply changes" : "Edit profile"}
               </button>
               <button
                 onClick={onLogout}
                 type='button'
-                className='bg-red-700 rounded-md p-3 text-white'
+                className='md:text-base text-sm bg-gray-100 border-red-600 border-2 rounded-2xl p-3 text-black font-semibold py-3 px-7 hover:bg-red-700 shadow-lg uppercase hover:text-white'
               >
                 Sign out
               </button>
             </div>
           </form>
+          <button
+            type='submit'
+            className='md:text-base text-sm w-full bg-blue-500 text-white uppercase px-7 py-3 font-medium rounded-2xl mt-8 hover:bg-blue-700 shadow-lg'
+          >
+            <Link to='/create-listing'>Add office</Link>
+          </button>
         </div>
       </section>
     </>

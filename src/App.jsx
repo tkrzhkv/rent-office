@@ -9,6 +9,7 @@ import { Header } from "./components/Header";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { PrivateRoute } from "./components/PrivateRoute";
+import { CreateListing } from "./pages/CreateListing";
 
 function App() {
   return (
@@ -46,12 +47,16 @@ function App() {
             path='/offers'
             element={<Offers />}
           />
+          <Route
+            path='/create-listing'
+            element={<CreateListing />}
+          />
         </Routes>
       </Router>
       <ToastContainer
         position='bottom-center'
-        autoClose={5000}
-        hideProgressBar={false}
+        autoClose={1000}
+        hideProgressBar={true}
         newestOnTop={false}
         closeOnClick
         rtl={false}
