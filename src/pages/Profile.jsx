@@ -111,14 +111,14 @@ export const Profile = () => {
                   setChangeDetail((prevState) => !prevState);
                 }}
                 type='button'
-                className='md:text-base text-sm bg-gray-100 border-blue-600 border-2 rounded-2xl p-3 text-black font-semibold py-3 px-7 hover:bg-blue-500 shadow-lg uppercase hover:text-white'
+                className='md:text-base text-sm bg-gray-100 border-blue-600 border-2 rounded-2xl p-3 text-black font-semibold py-2 px-2 hover:bg-blue-500 shadow-lg uppercase hover:text-white'
               >
                 {changeDetail ? "Apply changes" : "Edit profile"}
               </button>
               <button
                 onClick={onLogout}
                 type='button'
-                className='md:text-base text-sm bg-gray-100 border-red-600 border-2 rounded-2xl p-3 text-black font-semibold py-3 px-7 hover:bg-red-700 shadow-lg uppercase hover:text-white'
+                className='md:text-base text-sm p-0 bg-gray-100 border-red-600 border-2 rounded-2xl md:p-3 text-black font-semibold py-2 px-2 hover:bg-red-700 shadow-lg uppercase hover:text-white'
               >
                 Sign out
               </button>
@@ -135,8 +135,8 @@ export const Profile = () => {
       <div className='max-w-6xl px-3 mx-auto'>
         {!loading && listings.length > 0 && (
           <>
-            <h2 className='text-2xl text-center font-semibold'>My Listings</h2>
-            <ul>
+            <h2 className='text-2xl text-center font-semibold mb-6'>My Listings</h2>
+            <ul className='sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 mt-6 mb-6'>
               {listings.map((listing) => (
                 <ListingItem
                   key={listing.id}
