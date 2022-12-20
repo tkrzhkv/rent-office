@@ -80,6 +80,19 @@ export const Profile = () => {
     fetchUserListings();
   }, [auth.currentUser.uid]);
 
+  const onDelete = async (listingId) => {
+    if (window.confirm("Are you sure you want to delete ?")) {
+      await deleteDoc(doc(db, "listings", listingId));
+      const updatedListings = listings.filter((listing) => listing.id !== listingId);
+      setListings(updatedListings);
+      toast.success("Successfully deleted");
+    }
+  };
+
+  const onEdit = (listingId) => {
+    navigate(`/edit-listing/${listingId}`);
+  };
+
   return (
     <>
       <section className=' flex justify-center items-center flex-col'>
@@ -142,6 +155,8 @@ export const Profile = () => {
                   key={listing.id}
                   id={listing.id}
                   listing={listing.data}
+                  onDelete={() => onDelete(listing.id)}
+                  onEdit={() => onEdit(listing.id)}
                 />
               ))}
             </ul>

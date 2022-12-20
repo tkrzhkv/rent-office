@@ -2,8 +2,9 @@ import React from "react";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
 import { ImLocation } from "react-icons/im";
+import { FaRegTrashAlt, FaRegEdit } from "react-icons/fa";
 
-export const ListingItem = ({ listing, id }) => {
+export const ListingItem = ({ listing, id, onEdit, onDelete }) => {
   return (
     <li className='relative bg-white flex flex-col justify-between items-center shadow-md hover:shadow-xl rounded-md overflow-hidden transition-shadow duration-150 m-[10px]'>
       <Link
@@ -51,6 +52,18 @@ export const ListingItem = ({ listing, id }) => {
           </div>
         </div>
       </Link>
+      {onDelete && (
+        <FaRegTrashAlt
+          className='absolute bottom-3 right-4 h-[20px] text-red-600 cursor-pointer'
+          onClick={() => onDelete(listing.id)}
+        />
+      )}
+      {onEdit && (
+        <FaRegEdit
+          className='absolute bottom-3 right-14 h-5 w-5 text-green-700 cursor-pointer'
+          onClick={() => onEdit(listing.id)}
+        />
+      )}
     </li>
   );
 };
