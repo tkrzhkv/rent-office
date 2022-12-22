@@ -11,6 +11,7 @@ import { ImLocation } from "react-icons/im";
 import { FaBed, FaBath, FaParking, FaChair } from "react-icons/fa";
 import { getAuth } from "firebase/auth";
 import { Contact } from "../components/Contact";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 
 export const Listing = () => {
   const auth = getAuth();
@@ -51,7 +52,7 @@ export const Listing = () => {
         {listing.imgUrls.map((url, index) => (
           <SwiperSlide key={index}>
             <div
-              className='relative w-full overflow-hidden h-[600px]'
+              className='relative mx-auto w-[100%] overflow-hidden h-[400px]'
               style={{
                 background: `url(${listing.imgUrls[index]}) center no-repeat`,
                 backgroundSize: "cover",
@@ -61,7 +62,7 @@ export const Listing = () => {
         ))}
       </Swiper>
       <div
-        className='fixed top-[13%] right-[3%] z-10 cursor-pointer bg-white border-2 border-gray-400 rounded-full w-12 h-12 flex justify-center items-center hover:scale-110 hover:border-black hover:shadow-xl'
+        className='fixed top-[13%] right-[8%] z-10 cursor-pointer bg-white border-2 border-gray-400 rounded-full w-12 h-12 flex justify-center items-center hover:scale-110 hover:border-black hover:shadow-xl'
         onClick={() => {
           navigator.clipboard.writeText(window.location.href);
           setShareLinkCopied(true);
@@ -78,26 +79,25 @@ export const Listing = () => {
           Link copied
         </p>
       )}
-
       <div className='flex flex-col md:flex-row max-w-6xl lg:mx-auto m-4 p-4 rounded-lg border-3 shadow-lg lg:space-x-5'>
-        <div className=' w-full '>
-          <p className='text-2xl font-bold mb-3 p-3 text-blue-900'>
+        <div className='w-full'>
+          <p className='text-2xl font-bold p-3 text-blue-900'>
             {listing.name} - ${" "}
             {listing.offer
               ? listing.discountedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
               : listing.regularPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             {listing.type === "rent" ? " / months" : ""}
           </p>
-          <p className='flex items-center mt-4 mb-3 font-semibold px-3'>
+          <p className='flex items-center  mb-4 font-semibold px-3'>
             <ImLocation className='text-green-700 mr-1' />
             {listing.address}
           </p>
           <div className='flex space-x-2 px-4 items-center w-[75%]'>
-            <p className='bg-red-800 w-full rounded-lg max-w-[200px] p-1 text-white text-center font-semibold shadow-lg'>
+            <p className='bg-red-800 w-full rounded-lg max-w-[200px] p-1 text-white text-center font-semibold shadow-lg text-xs sm:text-base'>
               {listing.type === "rent" ? "Rent" : "Sale"}
             </p>
             {listing.offer && (
-              <p className='w-full max-w-[200px] bg-green-800 rounded-lg text-white text-center p-1 font-semibold shadow-lg'>
+              <p className='w-full max-w-[200px] bg-green-800 rounded-lg text-white text-center p-1 font-semibold shadow-lg text-xs sm:text-base'>
                 ${listing.regularPrice - listing.discountedPrice} discount
               </p>
             )}
@@ -106,7 +106,7 @@ export const Listing = () => {
             <span className='font-bold'>Description - </span>
             {listing.description}
           </p>
-          <ul className='flex items-center space-x-2 lg:space-x-10 text-sm font-semibold mb-6'>
+          <ul className='sm:flex items-center ml-4 justify-between lg:space-x-10 text-sm font-semibold mb-6'>
             <li className='flex items-center whitespace-nowrap'>
               <FaBed className='text-lg mr-1' />
               {+listing.bedrooms > 1 ? `${listing.bedrooms} Beds` : "1 Bed"}
@@ -141,7 +141,22 @@ export const Listing = () => {
             />
           )}
         </div>
-        <div className='bg-blue-300 w-full h-[200px] lg:h-[400px] z-10 overflow-hidden'></div>
+        <div className=' w-full h-[200px] md:h-[400px] z-10 overflow-hidden mt-6 md:mt-0 md:ml-2 border-2 border-gray-400 rounded'>
+          <MapContainer
+            center={[listing.geolocation.lat, listing.geolocation.lng]}
+            zoom={13}
+            scrollWheelZoom={false}
+            style={{ height: "100%", width: "100%" }}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+            />
+            <Marker position={[listing.geolocation.lat, listing.geolocation.lng]}>
+              <Popup>{listing.address}</Popup>
+            </Marker>
+          </MapContainer>
+        </div>
       </div>
     </main>
   );
