@@ -106,7 +106,9 @@ export const Category = () => {
           )}
         </>
       ) : (
-        <p>No current offers</p>
+        <p>
+          No current offers {params.categoryName === "rent" ? "places for rent" : "places for sale"}
+        </p>
       )}
     </div>
   );
